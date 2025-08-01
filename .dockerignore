@@ -1,0 +1,15 @@
+# Ignore Python cache files
+__pycache__/
+*.pyc
+
+# Ignore log files
+*.log
+
+# Ignore Git folder (if you're using Git)
+.git
+.gitignore
+
+# Optional: ignore README and status if not needed in container
+README.md
+status.json
+

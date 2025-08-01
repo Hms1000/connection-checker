@@ -1,0 +1,18 @@
+# Python cache and compiled files
+__pycache__/
+*.pyc
+
+# Log files
+*.log
+
+# Runtime generated JSON
+status.json
+
+# IDE settings (optional)
+.vscode/
+.idea/
+
+# OS files (optional)
+.DS_Store
+Thumbs.db
+
