@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y iputils-ping && rm -rf /var/lib/apt/lis
 # i set up the working directory inside the container
 WORKDIR /app
 
-# copying only requirements first for better caching
+# copying only requirements first for better caching ( no dependencies yet will introduce pytest later) 
 COPY requirements.txt .
 
 # Installing dependencies
