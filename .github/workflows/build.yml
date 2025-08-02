@@ -7,10 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }} # running the workflow on multiple workflows
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ubuntu-latest # running on ubuntu-latest
 
     steps:
       - name: Checkout code
@@ -24,6 +21,9 @@ jobs:
 
       - name: Build Docker Image
         run: docker build -t mazivazvose/connection-checker . # buiding image with Dockerfile
+
+      - name: List images
+        run: docker images    # listing the build images 
 
       - name: Run tests inside container
         run: docker run --rm mazivazvose/connection-checker pytest # running tests in Docker container
