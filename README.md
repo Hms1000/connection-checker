@@ -4,7 +4,7 @@ This is a Python tool to check internet connectivity on various devices includin
 
 The tool uses **ping requests** (ICMP packets) to test network connectivity. It generates logs, which are essential for cybersecurity and troubleshooting.
 
-The tool has been Dockerized and is planned to be integrated into a CI/CD pipeline.
+The tool has been Dockerized and integrated into a CI/CD pipeline.
 
 ## Purpose
 
