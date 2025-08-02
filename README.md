@@ -1,8 +1,8 @@
 # Connection Checker
 
-This is a Python script to check internet connectivity on various devices including VMs, PCs, and containers.
+This is a Python tool to check internet connectivity on various devices including VMs, PCs, and containers.
 
-The script uses **ping requests** (ICMP packets) to test network connectivity. It generates logs, which are essential for cybersecurity and troubleshooting.
+The tool uses **ping requests** (ICMP packets) to test network connectivity. It generates logs, which are essential for cybersecurity and troubleshooting.
 
 The tool has been Dockerized and is planned to be integrated into a CI/CD pipeline.
 
@@ -13,25 +13,21 @@ This tool helps users:
 - Verify if their internet connection is active.
 - Troubleshoot network issues on containers, VMs, and other environments.
 
----
 
 ## Requirements
 
-- Python 3 must be installed to run the script.
-- The script runs on a command-line interface (CLI).
+- Python 3 must be installed to run the tool.
+- The tool runs on a command-line interface (CLI).
 
----
 
 ## Dependencies
 
- Dependencies will be added to the `requirements.txt` as the script is involves in future
+- Dependencies are listed in `requirements.txt` file.
 
-
----
 
 ## Usage
 
-Run the script from the command line as follows:
+Run the tool from the command line as follows:
 
 ```bash
 
@@ -54,13 +50,16 @@ python3 connection-checker.py
 
 ## Screenshot
 
-- Here is a screenshot of the tool in action:
+- Here is a screenshot of the tool in action showing scenarios where the internet is on and when its off.
 
-- ![Connection Checker Screenshot](images/connection-checker.png)
+ ![Connection Checker Screenshot](images/connection-checker.png)
+
 
 ## Docker
-- The script is Dockerized for easy deployment and integration with CI/CD pipelines.
+
+- The tool is Dockerized for easy deployment and integration with CI/CD pipelines.
 
 ## Logging
-- The script produces logs that are helpful for cybersecurity analysis and troubleshooting network issues.
+
+- The tool produces logs that are helpful for cybersecurity analysis and troubleshooting network issues.
 
