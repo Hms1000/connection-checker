@@ -50,7 +50,7 @@ python3 connection-checker.py
 
 ## Screenshot
 
-- Here is a screenshot of the tool in action showing scenarios where the internet is on and when its off.
+- Here is a screenshot of the tool in action, showing scenarios where the internet is on and when its off.
 
  ![Connection Checker Screenshot](images/connection-checker.png)
 
