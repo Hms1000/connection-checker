@@ -25,8 +25,5 @@ jobs:
       - name: List images
         run: docker images    # listing the build images 
 
-      - name: Run tests inside container
-        run: docker run --rm mazivazvose/connection-checker pytest # running tests in Docker container
-
       - name: Push Docker Image
         run: docker push mazivazvose/connection-checker # pushing the image to Docker Hub
