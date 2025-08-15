@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main    # triggering the workflow on push to main
+  pull_request:
 
 jobs:
   build:
@@ -13,6 +14,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3 # getting source code from repo
 
+       # logging to docker securely using repository secrets
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
         with:
@@ -20,10 +22,13 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}  # dockerhub password
 
       - name: Build Docker Image
-        run: docker build -t mazivazvose/connection-checker:latest . # buiding image with Dockerfile
+        run: docker build -t mazivazvose/connection-checker:latest -t mazivazvose/connection-checker:${{ github.sha }} . # building image
 
-      - name: List images
-        run: docker images    # listing the build images 
+      - name: Test Container
+        run: docker run --rm mazivazvose/connection-checker:latest python3 connection-checker.py --target 8.8.8.8
 
       - name: Push Docker Image
         run: docker push mazivazvose/connection-checker:latest # pushing the image to Docker Hub
+
+      - name: Push SHA-tagged image
+        run: docker push mazivazvose/connection-checker:${{ github.sha }}
