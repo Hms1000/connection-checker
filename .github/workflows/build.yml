@@ -23,11 +23,11 @@ jobs:
 
        # building docker compose services
       - name: Build docker compose services
-        run: docker compose -f docker-compose.yml build
+        run: docker-compose -f docker-compose.yml build
 
        # testing the container
-      - name: Test Container service
-        run: docker compose -f docker-compose.yml run --rm connection-checker python3 connection-checker.py --target 8.8.8.8
+      - name: Test connection checker
+        run: docker-compose -f docker-compose.yml run --rm connection-checker python3 connection-checker.py --target 8.8.8.8
 
       - name: Push Docker Image
         run: docker push mazivazvose/connection-checker:latest # pushing the image to Docker Hub
