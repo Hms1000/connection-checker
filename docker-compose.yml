@@ -1,8 +1,9 @@
-version: '1.8'
+version: '3.8'
 
 services:
   connection-checker:
     build: .                         # building docker image from the current directory 
+    image: maizvazvose/connection-checker:latest
     container_name: connection-checker
     volumes:
       - connection-checker-data:/app/data # persitent logs and JSON output
