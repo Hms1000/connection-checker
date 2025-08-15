@@ -25,6 +25,9 @@ jobs:
       - name: Build docker compose services
         run: docker compose -f docker-compose.yml build
 
+      - name: Tag docker image with SHA
+        run: docker tag mazivazvose/connection-checker:latest mazivazvose/connection-checker:${{ github.sha }}
+
        # testing the container
       - name: Test connection checker
         run: docker compose -f docker-compose.yml run --rm connection-checker python3 connection-checker.py --target 8.8.8.8
