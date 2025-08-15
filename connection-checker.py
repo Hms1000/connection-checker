@@ -3,6 +3,7 @@ import subprocess
 import argparse
 import logging
 import json
+import os
 
 # i decided to setup logging so that i can not miss important infomation
 log_file = Path(__file__).with_name('connection-checker.log')
@@ -41,14 +42,19 @@ def save_json_output(filename, result):
 # i put everything together using a main function 
 def main():
     parser = argparse.ArgumentParser(description='internet connectivity checker')
-    parser.add_argument('--target', type=str, default='8.8.8.8', help='target ip address or url')
+    parser.add_argument('--target', type=str, default=os.environ.get("TARGET",'8.8.8.8'), help='target ip address or url')
     parser.add_argument('--packet', type=int, default=4, help='number of ping packets')
     parser.add_argument('--output', default='status.json', help='Output JSON filename')
     args = parser.parse_args()
 
     result = check_connection(args.packet, args.target)
+    
+    # Save the JSON output inside /app/data so it persists
+    output_file = Path("/app/data") / args.output
 
-    save_json_output(args.output, result)
+    save_json_output(output_file, result)
 
 if __name__ == '__main__':
     main()
+
+
