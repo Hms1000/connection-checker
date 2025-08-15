@@ -21,14 +21,16 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}  # dockerhub username
           password: ${{ secrets.DOCKER_PASSWORD }}  # dockerhub password
 
-      - name: Build Docker Image
-        run: docker build -t mazivazvose/connection-checker:latest -t mazivazvose/connection-checker:${{ github.sha }} . # building image
+       # building docker compose services
+      - name: Build docker compose services
+        run: docker-compose -f docker-compose.yml build
 
-      - name: Test Container
-        run: docker run --rm mazivazvose/connection-checker:latest python3 connection-checker.py --target 8.8.8.8
+       # testing the container
+      - name: Test Container service
+        run: docker-compose -f docker-compose.yml run --rm connection-checker python3 connection-checker.py --target 8.8.8.8
 
       - name: Push Docker Image
         run: docker push mazivazvose/connection-checker:latest # pushing the image to Docker Hub
 
       - name: Push SHA-tagged image
-        run: docker push mazivazvose/connection-checker:${{ github.sha }}
+        run: docker push mazivazvose/connection-checker:${{ github.sha }} # pushing SHA taggged image
