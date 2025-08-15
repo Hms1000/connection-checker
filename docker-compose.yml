@@ -1,0 +1,22 @@
+version: '1.8'
+
+services:
+  connection-checker:
+    build: .                         # building docker image from the current directory 
+    container_name: connection-checker
+    volumes:
+      - connection-checker-data:/app/data # persitent logs and JSON output
+
+    restart: unless-stopped          # automatically restart container if stopped
+
+    environment:
+      - TARGET=8.8.8.8               # target ip for conncetivity check
+
+    healthcheck:                     # monitoring container healthy
+      test: ["CMD-SHELL", "ping -c 1 $TARGET"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+volumes:                             # named volume to store persistent data
+  connection-checker-data:
