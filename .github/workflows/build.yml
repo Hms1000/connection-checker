@@ -25,6 +25,7 @@ jobs:
       - name: Build docker compose services
         run: docker compose -f docker-compose.yml build
 
+       # tagging the images for better versioning
       - name: Tag docker image with SHA
         run: docker tag mazivazvose/connection-checker:latest mazivazvose/connection-checker:${{ github.sha }}
 
