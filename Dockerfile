@@ -1,20 +1,33 @@
-# i used a python baseline image
+# install python base image
 FROM python:3.11-slim
 
-# install required packages
-RUN apt-get update && apt-get install -y iputils-ping && rm -rf /var/lib/apt/lists/*
+# install required system packages as root
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends iputils-ping && \
+    rm -rf /var/lib/apt/lists/*
 
-# i set up the working directory inside the container
+# create not root user
+RUN useradd -ms /bin/bash appuser
+
+# set working directory
 WORKDIR /app
 
-# copying only requirements first for better caching ( no dependencies yet will introduce pytest later) 
-COPY requirements.txt .
+# copy requirements
+COPY --chown=appuser:appuser requirements.txt .
 
-# Installing dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+# switch to non root user
+USER appuser
+ENV PATH=/home/appuser/.local/bin:$PATH
 
-# now i copy the rest of the application files
-COPY . .
+# install python dependencies as non root
+RUN pip install --upgrade pip && \ 
+    pip install --no-cache-dir --user -r requirements.txt
 
-# these are the commands to run the script
+# copy the rest of the application
+COPY --chown=appuser:appuser . .
+
+# run application as non root
 CMD ["python3", "connection-checker.py"]
+
+
+ 
